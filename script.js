@@ -1,6 +1,15 @@
 const categoryContainer = document.getElementById("categoryContainer");
 const cardContainer = document.getElementById("cardContainer")
 
+const loadALLPlants = () => {
+  fetch("https://openapi.programming-hero.com/api/plants")
+  .then(res => res.json())
+  .then(data => {
+    showCardByCategory(data.plants)
+  })
+  .catch(err => console.log(err));
+};
+
 const loadCategory = () => {
   fetch("https://openapi.programming-hero.com/api/categories")
     .then((res) => res.json())
@@ -88,3 +97,4 @@ plants.forEach(plants => {
 }
 
 loadCategory();
+loadALLPlants();

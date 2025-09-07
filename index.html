@@ -15,18 +15,24 @@
   </head>
   <body>
     <!-- Navbar -->
-    <nav class="flex flex-col md:flex-row items-center justify-between bg-green-700 p-5 text-white">
+    <nav
+      class="flex flex-col md:flex-row items-center justify-between bg-green-700 p-5 text-white"
+    >
       <div class="text-lg font-bold">Green Earth</div>
 
       <div>
-        <ul class="flex flex-col md:flex-row gap-3 md:gap-5 mt-2 md:mt-0 text-center">
+        <ul
+          class="flex flex-col md:flex-row gap-3 md:gap-5 mt-2 md:mt-0 text-center"
+        >
           <li class="">About</li>
           <li class="">Gallery</li>
           <li class="">Plant a Tree</li>
         </ul>
       </div>
 
-      <div class="mt-3 md:mt-0 border px-4 py-2 rounded-3xl bg-yellow-500 text-green-700 font-semibold cursor-pointer hover:bg-yellow-400">
+      <div
+        class="mt-3 md:mt-0 border px-4 py-2 rounded-3xl bg-yellow-500 text-green-700 font-semibold cursor-pointer hover:bg-yellow-400"
+      >
         Plan a Tree
       </div>
     </nav>
@@ -42,7 +48,9 @@
 
       <!-- main content center -->
       <div class="flex flex-col items-center justify-center text-center px-2">
-        <h1 class="text-xl md:text-2xl font-bold">Plant a Tree, Grow a Future</h1>
+        <h1 class="text-xl md:text-2xl font-bold">
+          Plant a Tree, Grow a Future
+        </h1>
         <p class="mt-2 text-sm md:text-base max-w-md">
           Join our mission to plant 1 million trees and make the Earth greener
           for future generations.
@@ -60,50 +68,46 @@
       </div>
     </section>
 
-        
+    <!-- categories card and your cart section  -->
+    <main class="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 bg-green-50">
+      <!-- Title -->
+      <h1 class="md:col-span-12 text-center text-2xl font-bold mb-6">
+        Choose Your Trees
+      </h1>
 
-          <!-- categories card and your cart section  -->
-           <main class="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 bg-green-50">
-  <!-- Title -->
-  <h1 class="md:col-span-12 text-center text-2xl font-bold mb-6">
-    Choose Your Trees
-  </h1>
+      <!-- Categories -->
+      <nav class="md:col-span-2 bg-green-50 p-4 rounded shadow">
+        <ul id="categoryContainer">
+          <h2 class="font-bold mb-4">Categories</h2>
+          <li
+            id="categoryList"
+            class="max-w-[250px] max-h-[35px] py-2 rounded hover:border-green-700 hover:border-2 hover:bg-green-600 hover:text-white"
+          >
+            Tree List
+          </li>
+        </ul>
+      </nav>
 
-  <!-- Categories -->
-  <nav  class="md:col-span-2 bg-green-50 p-4 rounded shadow">
-    <ul id="categoryContainer">
-      <h2 class="font-bold mb-4">Categories</h2>
-    <li id="categoryList" class="max-w-[250px] max-h-[35px] py-2 rounded hover:border-green-700 hover:border-2 hover:bg-green-600 hover:text-white ">Tree List</li>
-    </ul>
-    
-  </nav>
+      <!-- Cards section -->
+      <!-- <section class="col-span-7 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4"> -->
 
-  <!-- Cards section -->
-<!-- <section class="col-span-7 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4"> -->
-  
-  <!-- Single Card -->
-  <div id="cardContainer" class="col-span-8 grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
-    
-    
-    
-    
-    
-  </div>
+      <!-- Single Card -->
+      <div
+        id="cardContainer"
+        class="col-span-8 grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4 line-clamp-3"
+      >
+    </div>
 
-
-
-
-  <!-- Cart section -->
-  <!-- <aside class="md:col-span-2 bg-white p-4 rounded shadow">
+      <!-- Cart section -->
+      <aside class="md:col-span-2 bg-white p-4 rounded shadow">
     <h2 class="font-bold mb-4">Your Cart</h2>
     <ul id="cartList" class="space-y-2"></ul>
     <div class="flex justify-between font-bold mt-4 border-t pt-2">
       <span>Total:</span>
       <span id="cartTotal">৳0</span>
     </div>
-  </aside> -->
-</main>
-
+  </aside>
+    </main>
 
     <script src="script.js"></script>
   </body>
