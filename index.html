@@ -86,9 +86,9 @@
         <ul id="categoryContainer" class="space-y-2">
           <li
             id="categoryList"
-            class="w-full py-2 px-3 rounded cursor-pointer hover:border-green-700 hover:border-2 hover:bg-green-600 hover:text-white"
+            class="p-1 px-3 rounded cursor-pointer hover:border-green-700 hover:border-2 hover:bg-green-600 hover:text-white"
           >
-            Tree List
+          Tree List
           </li>
         </ul>
       </nav>
@@ -117,6 +117,23 @@
     <span id="cartTotal">৳0</span>
   </div>
 </aside>
+</main>
+
+<!-- modal  -->
+ <!-- Open the modal using ID.showModal() method -->
+<dialog id="cart-details-modal" class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <div id="modalContainer">
+
+    </div>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
 
 
 

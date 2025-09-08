@@ -1,6 +1,8 @@
 const categoryContainer = document.getElementById("categoryContainer");
 const cardContainer = document.getElementById("cardContainer");
 const addToCardContainer = document.getElementById("addToCardContainer");
+const cartDetailsModal = document.getElementById("cart-details-modal");
+const modalContainer = document.getElementById("modalContainer");
 
 let addCarts = [];
 
@@ -52,6 +54,7 @@ const showCategory = (categories) => {
 };
 
 const loadNewsByCategory = (categoryId) => {
+  showLoading();
   console.log(categoryId);
   fetch(`https://openapi.programming-hero.com/api/category/${categoryId}`)
     .then((res) => res.json())
@@ -66,6 +69,7 @@ const loadNewsByCategory = (categoryId) => {
 
 const showCardByCategory = (plants) => {
   cardContainer.innerHTML = "";
+
   //  console.log(plants)
   plants.forEach((plants) => {
     cardContainer.innerHTML += ` <div>
@@ -81,12 +85,15 @@ const showCardByCategory = (plants) => {
   <!-- Description -->
   <p class="text-sm text-gray-600">
     ${plants.description}
+    
+
   </p>
 
   <!-- Category + Price -->
   <div class="flex justify-between items-center mt-3">
-    <span class="px-3 py-1 text-sm rounded-full bg-green-100 text-green-700">
+    <span class="px-3 p-1 text-sm rounded-full bg-green-100 text-green-700">
       ${plants.category}
+      
     </span>
     <span class="font-semibold">৳${plants.price}</span>
   </div>
@@ -106,12 +113,33 @@ const showCardByCategory = (plants) => {
 cardContainer.addEventListener("click", (e) => {
   if (e.target.innerText === "Add to Cart") {
     handleAddCarts(e);
-    showLoading()
   }
 });
 
 const handleAddCarts = (e) => {
   const card = e.target.parentNode; // button parent div
+  fetch(`https://openapi.programming-hero.com/api/plant/${card.id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      showDetails(data.plants);
+    })
+    .catch((err) => {
+      console.log(er);
+    });
+
+  const showDetails = (plants) => {
+    cartDetailsModal.showModal();
+    modalContainer.innerHTML = `
+    <div style="max-width:400px; margin:0 auto; padding:10px;  border-radius:8px;">
+      <img src="${plants.image}"  style="width:100%; height:250px; object-fit:cover; border-radius:8px; margin-bottom:10px;" />
+      <h2 style="font-size:20px; font-weight:bold; margin:5px 0;">${plants.name}</h2>
+      <h3 style="color:red; margin:5px 0;">Category: ${plants.category}</h3>
+      <p style="margin:10px 0; color: gray;">${plants.description}</p>
+      <h3 style="font-size:18px; font-weight:bold; color: green;">Price: ৳${plants.price}</h3>
+    </div>
+  `;
+  };
 
   // title
   const title = card.querySelector("h2").innerText;
@@ -166,8 +194,8 @@ const showLoading = () => {
   cardContainer.innerHTML = `
           <div class="flex justify-center items-center h-20 w-200"><span class="loading loading-bars loading-xl"></span></div>
 
-  `
-}
+  `;
+};
 
 loadCategory();
 loadALLPlants();
