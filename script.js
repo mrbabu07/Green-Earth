@@ -151,7 +151,7 @@ const showAddCarts = (addCarts) => {
 
   // Update total
   const cartTotal = document.getElementById("cartTotal");
-  cartTotal.innerText = `Total: ৳${total}`;
+  cartTotal.innerText = `৳${total}`;
 };
 
 const handleDelete = (addCartId) => {
