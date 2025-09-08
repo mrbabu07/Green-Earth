@@ -1,13 +1,16 @@
 const categoryContainer = document.getElementById("categoryContainer");
-const cardContainer = document.getElementById("cardContainer")
+const cardContainer = document.getElementById("cardContainer");
+const addToCardContainer = document.getElementById("addToCardContainer");
+
+let addCarts = [];
 
 const loadALLPlants = () => {
   fetch("https://openapi.programming-hero.com/api/plants")
-  .then(res => res.json())
-  .then(data => {
-    showCardByCategory(data.plants)
-  })
-  .catch(err => console.log(err));
+    .then((res) => res.json())
+    .then((data) => {
+      showCardByCategory(data.plants);
+    })
+    .catch((err) => console.log(err));
 };
 
 const loadCategory = () => {
@@ -32,8 +35,10 @@ const showCategory = (categories) => {
 
         `;
   });
+
   categoryContainer.addEventListener("click", (e) => {
-    const allLi = document.querySelectorAll("li");
+    const allLi = categoryContainer.querySelectorAll("li");
+
     // console.log(allLi)
     allLi.forEach((li) => {
       li.classList.remove("bg-green-600");
@@ -41,30 +46,30 @@ const showCategory = (categories) => {
     if (e.target.localName === "li") {
       console.log(e.target);
       e.target.classList.add("bg-green-600");
-      loadNewsByCategory(e.target.id)
+      loadNewsByCategory(e.target.id);
     }
   });
 };
 
 const loadNewsByCategory = (categoryId) => {
-  console.log(categoryId)
+  console.log(categoryId);
   fetch(`https://openapi.programming-hero.com/api/category/${categoryId}`)
-  .then(res => res.json())
-  .then(data => {
-    // console.log(data)
-    showCardByCategory(data.plants)
-  })
-  .catch(err => {
-    console.log(err)
-  })
-}
+    .then((res) => res.json())
+    .then((data) => {
+      // console.log(data)
+      showCardByCategory(data.plants);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
-const showCardByCategory = (plants) =>{
-  cardContainer.innerHTML = ""
-//  console.log(plants)
-plants.forEach(plants => {
-  cardContainer.innerHTML += `
-  <div class="p-4 bg-white rounded-lg shadow-md">
+const showCardByCategory = (plants) => {
+  cardContainer.innerHTML = "";
+  //  console.log(plants)
+  plants.forEach((plants) => {
+    cardContainer.innerHTML += `
+  <div id="${plants.id}" class="p-4 bg-white rounded-lg shadow-md">
   <!-- Image -->
   <div class="h-40 bg-gray-200 rounded-lg mb-3 overflow-hidden">
     <img src="${plants.image}" class="w-full h-full object-cover" />
@@ -87,14 +92,73 @@ plants.forEach(plants => {
   </div>
 
   <!-- Button -->
-  <button class="w-full mt-3 bg-green-600 text-white py-2 rounded-full hover:bg-green-700 transition">
+  <button id="addToCardContainer" class="btn w-full mt-3 bg-green-600 text-white py-2 rounded-full hover:bg-green-700 transition">
     Add to Cart
   </button>
+  
 </div>
 
-  `
-})
-}
+  `;
+  });
+};
+
+cardContainer.addEventListener("click", (e) => {
+  if (e.target.innerText === "Add to Cart") {
+    handleAddCarts(e);
+  }
+});
+
+const handleAddCarts = (e) => {
+  const card = e.target.parentNode; // button parent div
+
+  // title
+  const title = card.querySelector("h2").innerText;
+
+  // price
+  const price = card
+    .querySelector("span.font-semibold")
+    .innerText.replace("৳", "");
+
+  const id = card.id;
+
+  addCarts.push({
+    title: title,
+    id: id,
+    price: price,
+  });
+
+  showAddCarts(addCarts);
+};
+
+const showAddCarts = (addCarts) => {
+  addToCardContainer.innerHTML = "";
+
+  let total = 0;
+
+  addCarts.forEach((addCart) => {
+    total += parseFloat(addCart.price);
+
+    addToCardContainer.innerHTML += `
+      <div class="my-2 p-1 bg-green-200 rounded flex justify-between items-center">
+        <div>
+          <h1>${addCart.title}</h1>
+          <p>৳${addCart.price}</p>
+        </div>
+        <button onclick="handleDelete('${addCart.id}')" class="btn btn-xs bg-green-200 border-none">✘</button>
+      </div>
+    `;
+  });
+
+  // Update total
+  const cartTotal = document.getElementById("cartTotal");
+  cartTotal.innerText = `Total: ৳${total}`;
+};
+
+const handleDelete = (addCartId) => {
+  addCarts = addCarts.filter((addCart) => addCart.id !== addCartId);
+
+  showAddCarts(addCarts);
+};
 
 loadCategory();
 loadALLPlants();
