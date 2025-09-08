@@ -106,6 +106,7 @@ const showCardByCategory = (plants) => {
 cardContainer.addEventListener("click", (e) => {
   if (e.target.innerText === "Add to Cart") {
     handleAddCarts(e);
+    showLoading()
   }
 });
 
@@ -152,7 +153,7 @@ const showAddCarts = (addCarts) => {
 
   // Update total
   const cartTotal = document.getElementById("cartTotal");
-  cartTotal.innerText = `Total: ৳${total}`;
+  cartTotal.innerText = `৳${total}`;
 };
 
 const handleDelete = (addCartId) => {
@@ -160,6 +161,13 @@ const handleDelete = (addCartId) => {
 
   showAddCarts(addCarts);
 };
+
+const showLoading = () => {
+  cardContainer.innerHTML = `
+          <div class="flex justify-center items-center h-20 w-200"><span class="loading loading-bars loading-xl"></span></div>
+
+  `
+}
 
 loadCategory();
 loadALLPlants();
