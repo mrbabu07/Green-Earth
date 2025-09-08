@@ -68,7 +68,7 @@ const showCardByCategory = (plants) => {
   cardContainer.innerHTML = "";
   //  console.log(plants)
   plants.forEach((plants) => {
-    cardContainer.innerHTML += `
+    cardContainer.innerHTML += ` <div>
   <div id="${plants.id}" class="p-4 bg-white rounded-lg shadow-md">
   <!-- Image -->
   <div class="h-40 bg-gray-200 rounded-lg mb-3 overflow-hidden">
@@ -96,6 +96,7 @@ const showCardByCategory = (plants) => {
     Add to Cart
   </button>
   
+</div>
 </div>
 
   `;
@@ -151,7 +152,7 @@ const showAddCarts = (addCarts) => {
 
   // Update total
   const cartTotal = document.getElementById("cartTotal");
-  cartTotal.innerText = `৳${total}`;
+  cartTotal.innerText = `Total: ৳${total}`;
 };
 
 const handleDelete = (addCartId) => {
