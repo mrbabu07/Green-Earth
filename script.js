@@ -83,7 +83,7 @@ const showCardByCategory = (plants) => {
   <h2 class="text-lg font-semibold">${plants.name}</h2>
 
   <!-- Description -->
-  <p class="text-sm text-gray-600">
+  <p class="text-sm text-gray-600 line-clamp-4">
     ${plants.description}
     
 
